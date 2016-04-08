@@ -1,0 +1,37 @@
+html
+  head
+    title Config SynCozies
+  body
+    h1 Config SynCozies
+
+
+    form(action="./", method="post", enctype="application/x-www-form-urlencoded", accept-charset="utf-8")
+      ul
+        li
+          label Local Cozy URL
+            input(type='url', name='urlOfLocal', value=urlOfLocal)
+
+        li
+          label Main Cozy URL
+            input(type='url', name='urlOfMain')
+        li
+          label Cozies password
+            input#password(type='password', name='password')
+
+        li
+          label Device Name: only a-zA-Z0-9 and '-'
+            input#deviceName(type='text', name='deviceName')
+
+        li
+          input(type="submit", value="Submit")
+
+    lr
+    form(action='./reset', method='post', enctype="application/x-www-form-urlencoded", accept-charset="utf-8")
+      ul
+        li
+          label Cozies password
+            input#password(type='password', name='password')
+        li
+          input(type='submit',  value='reset database')
+
+

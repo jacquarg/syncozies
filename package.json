@@ -1,0 +1,34 @@
+{
+  "name": "syncosies",
+  "version": "0.0.1",
+  "description": "Sync a local Cozy instance with a remote master Cozy.",
+  "main": "server.js",
+  "dependencies": {
+    "async": "2.0.0-rc.2",
+    "body-parser": "1.14.2",
+    "cozydb": "0.1.10",
+    "express": "4.13.3",
+    "jade": "1.11.0",
+    "morgan": "1.6.1",
+    "pouchdb": "5.3.0",
+    "request-json": "0.5.5"
+  },
+  "devDependencies": {
+    "chai": "3.5.0",
+    "mocha": "1.20.1",
+    "nodemon": "1.8.1"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node_modules/.bin/nodemon server.js --ignore client/",
+    "test": "mocha tests/unit/*/* --reporter spec --colors"
+  },
+  "author": "jacquarg",
+  "license": "MIT",
+  "cozy-permissions": {
+    "All": {
+      "description": "sync all data between the various images of your cozy."
+      }
+  },
+  "cozy-displayName": "SynCosies"
+}

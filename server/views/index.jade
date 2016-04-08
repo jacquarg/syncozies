@@ -1,0 +1,19 @@
+html
+  head
+    title SynCozies
+  body
+    h1 SynCozies&nbsp;
+        - if (isRunning)
+            | started
+        - else
+            | stopped
+    h2
+      a(href='./config/') Config
+
+
+
+      form(action='./start', method='post', enctype="application/x-www-form-urlencoded")
+        input(type='submit',  value='start replications')
+
+    form(action='./stop', method='post', enctype="application/x-www-form-urlencoded")
+        input(type='submit',  value='stop replications')
