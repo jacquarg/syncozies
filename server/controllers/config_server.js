@@ -113,7 +113,7 @@ router.post('/config/', function(req, res, next) {
                 uri: req.body.urlOfLocal,
                 deviceName: req.body.deviceName,
                 password: req.body.password,
-                permissions: Permissions['cozy-permissions'],
+                permissions: Permissions,
             }, cb)
         },
         function(credentials, cb) {
@@ -129,7 +129,7 @@ router.post('/config/', function(req, res, next) {
                 uri: req.body.urlOfMain,
                 deviceName: config.deviceName,
                 password: req.body.password,
-                permissions: Permissions['cozy-permissions'],
+                permissions: Permissions,
             }, cb);
         },
         function(credentials, cb) {
