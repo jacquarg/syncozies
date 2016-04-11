@@ -9,8 +9,8 @@ Permissions = require('../../package.json')['cozy-permissions'];
 
 
 NO_SYNC_DOCTYPES = [
-    'access', 'application', 'cozyinstance',
-    'device', 'stackapplication', 'syncoziesconfig', 'user', 'usetracker'
+    'access', 'application', 'cozyinstance', 'device',
+     'stackapplication', 'syncoziesconfig', 'user', 'usetracker'
 ];
 
 // TODO : remove it !
@@ -138,24 +138,24 @@ router.post('/config/', function(req, res, next) {
                 devicePasswordOnMain: credentials.password,
             }, cb);
         },
-        // function(conf, cb) {
-        //     setFilter({
-        //         uri: config.urlOfLocal,
-        //         deviceName: config.deviceName,
-        //         password: config.devicePasswordOnLocal,
-        //     }, cb);
-        // },
-        // function(cb) {
-        //     setFilter({
-        //         uri: config.urlOfMain,
-        //         deviceName: config.deviceName,
-        //         password: config.devicePasswordOnMain,
-        //     }, cb);
-        // },
-//
-        // function(cb) {
-
         function(conf, cb) {
+            setFilter({
+                uri: config.urlOfLocal,
+                deviceName: config.deviceName,
+                password: config.devicePasswordOnLocal,
+            }, cb);
+        },
+        function(cb) {
+            setFilter({
+                uri: config.urlOfMain,
+                deviceName: config.deviceName,
+                password: config.devicePasswordOnMain,
+            }, cb);
+        },
+
+        function(cb) {
+
+        // function(conf, cb) {
             res.redirect('../');
             cb();
         },

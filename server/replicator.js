@@ -64,11 +64,11 @@ module.exports.start = function(callback) {
         // init replication !
         replication = local.sync(main, {
             batch_size: 20,
-            batches_limit: 5,
-            // filter: 'filter-' + config.deviceName + '-config/config',
-            filter: function(doc) {
-                return doc.docType && !(doc.docType.toLowerCase() in NO_SYNC_DOCTYPES);
-            },
+            batches_limit: 1,
+            filter: 'filter-' + config.deviceName + '-config/config',
+            // filter: function(doc) {
+            //     return doc.docType && !(doc.docType.toLowerCase() in NO_SYNC_DOCTYPES);
+            // },
             live: true,
             retry: true,
             heartbeat: false,
