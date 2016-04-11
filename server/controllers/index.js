@@ -12,14 +12,14 @@ router.post('/start', function(req, res, next) {
     Replicator.start(function(err) {
         if (err) { return next(err); }
 
-        res.redirect('/');
+        res.redirect('./');
 
     })
 });
 
 router.post('/stop', function(req, res, next) {
    Replicator.stop();
-   res.redirect('/');
+   res.redirect('./');
 });
 
 // Export the router instance to make it available from other files.

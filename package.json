@@ -1,6 +1,6 @@
 {
   "name": "syncosies",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Sync a local Cozy instance with a remote master Cozy.",
   "main": "server.js",
   "dependencies": {

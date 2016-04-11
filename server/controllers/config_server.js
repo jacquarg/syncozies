@@ -138,23 +138,25 @@ router.post('/config/', function(req, res, next) {
                 devicePasswordOnMain: credentials.password,
             }, cb);
         },
-        function(conf, cb) {
-            setFilter({
-                uri: config.urlOfLocal,
-                deviceName: config.deviceName,
-                password: config.devicePasswordOnLocal,
-            }, cb);
-        },
-        function(cb) {
-            setFilter({
-                uri: config.urlOfMain,
-                deviceName: config.deviceName,
-                password: config.devicePasswordOnMain,
-            }, cb);
-        },
+        // function(conf, cb) {
+        //     setFilter({
+        //         uri: config.urlOfLocal,
+        //         deviceName: config.deviceName,
+        //         password: config.devicePasswordOnLocal,
+        //     }, cb);
+        // },
+        // function(cb) {
+        //     setFilter({
+        //         uri: config.urlOfMain,
+        //         deviceName: config.deviceName,
+        //         password: config.devicePasswordOnMain,
+        //     }, cb);
+        // },
+//
+        // function(cb) {
 
-        function(cb) {
-            res.redirect('/');
+        function(conf, cb) {
+            res.redirect('../');
             cb();
         },
 
