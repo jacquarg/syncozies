@@ -7,6 +7,12 @@ CozyAPI = require('cozydb').api;
 Config = require('../models/syncozies_config');
 Permissions = require('../../package.json')['cozy-permissions'];
 
+
+NO_SYNC_DOCTYPES = [
+    'access', 'application', 'cozyinstance',
+    'device', 'user', 'usetracker'
+];
+
 // TODO : remove it !
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
@@ -81,10 +87,10 @@ var setFilter = function(options, callback) {
 };
 
 var buildFilter = function(options) {
-    compare = "doc.docType && ("
-    compare += "doc.docType.toLowerCase() === 'event'"
-    compare += "|| doc.docType.toLowerCase() === 'contact'"
-    compare += ")"
+    compare = "doc.docType "
+    NO_SYNC_DOCTYPES.forEach(function(docType) {
+        compare += "&& (doc.docType.toLowerCase() !== '" + docType + "') " ;
+    });
 
     // TODO ? add views attribute here, required by the DataSystem ?
     return {
@@ -113,6 +119,7 @@ router.post('/config/', function(req, res, next) {
         function(credentials, cb) {
             config.updateAttributes({
                 deviceName: credentials.login,
+                urlOfLocal: req.body.urlOfLocal,
                 devicePasswordOnLocal: credentials.password,
             }, cb);
         },
