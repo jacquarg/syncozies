@@ -10,7 +10,7 @@ Permissions = require('../../package.json')['cozy-permissions'];
 
 NO_SYNC_DOCTYPES = [
     'access', 'application', 'cozyinstance',
-    'device', 'user', 'usetracker'
+    'device', 'stackapplication', 'syncoziesconfig', 'user', 'usetracker'
 ];
 
 // TODO : remove it !

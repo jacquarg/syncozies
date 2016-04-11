@@ -1,6 +1,6 @@
 {
   "name": "syncosies",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Sync a local Cozy instance with a remote master Cozy.",
   "main": "server.js",
   "dependencies": {
@@ -11,6 +11,7 @@
     "jade": "1.11.0",
     "morgan": "1.6.1",
     "pouchdb": "5.3.0",
+    "printit": "0.1.19",
     "request-json": "0.5.5"
   },
   "devDependencies": {
@@ -28,7 +29,7 @@
   "cozy-permissions": {
     "All": {
       "description": "sync all data between the various images of your cozy."
-      }
+    }
   },
   "cozy-displayName": "SynCosies"
 }

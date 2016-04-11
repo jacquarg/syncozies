@@ -3,6 +3,12 @@
 PouchDB = require('pouchdb');
 
 Config = require('./models/syncozies_config');
+printit = require('printit');
+
+var log = printit({
+  prefix: 'SynCozies',
+  date: true
+});
 
 /**
  * Instantiage a new pouchdb on the specified remote Couch,
@@ -32,7 +38,7 @@ module.exports.start = function(callback) {
     }
 
     Config.first(function(err, config) {
-        if (err) { return console.log(err); }
+        if (err) { return log.error(err); }
 
         // else launch !
         var local = _newPouchDB(config.urlOfLocal, config.deviceName,
@@ -62,7 +68,7 @@ module.exports.start = function(callback) {
                 }
 
             }
-            console.log(msg);
+            log.info(msg);
         });
         callback();
     });
