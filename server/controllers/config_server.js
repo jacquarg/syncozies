@@ -68,6 +68,21 @@ var getOrCreateConfig = function(callback) {
 };
 
 
+var buildFilter = function(options) {
+    compare = "doc.docType "
+    NO_SYNC_DOCTYPES.forEach(function(docType) {
+        compare += "&& (doc.docType.toLowerCase() !== '" + docType + "') " ;
+    });
+
+    // TODO ? add views attribute here, required by the DataSystem ?
+    return {
+        filters: {
+            config: "function (doc) { return " + compare + "; }"
+        }
+    };
+};
+
+
 var setFilter = function(options, callback) {
     var client = request.createClient(options.uri);
     client.setBasicAuth(options.deviceName, options.password);
@@ -86,18 +101,20 @@ var setFilter = function(options, callback) {
     });
 };
 
-var buildFilter = function(options) {
-    compare = "doc.docType "
-    NO_SYNC_DOCTYPES.forEach(function(docType) {
-        compare += "&& (doc.docType.toLowerCase() !== '" + docType + "') " ;
-    });
+var setFilters = function(config, callback) {
+    setFilter({
+        uri: config.urlOfLocal,
+        deviceName: config.deviceName,
+        password: config.devicePasswordOnLocal,
+    }, function(err) {
+        if (err) { return callback(err); }
 
-    // TODO ? add views attribute here, required by the DataSystem ?
-    return {
-        filters: {
-            config: "function (doc) { return " + compare + "; }"
-        }
-    };
+        setFilter({
+            uri: config.urlOfMain,
+            deviceName: config.deviceName,
+            password: config.devicePasswordOnMain,
+        }, callback);
+    });
 };
 
 router.post('/config/', function(req, res, next) {
@@ -138,21 +155,7 @@ router.post('/config/', function(req, res, next) {
                 devicePasswordOnMain: credentials.password,
             }, cb);
         },
-        function(conf, cb) {
-            setFilter({
-                uri: config.urlOfLocal,
-                deviceName: config.deviceName,
-                password: config.devicePasswordOnLocal,
-            }, cb);
-        },
-        function(cb) {
-            setFilter({
-                uri: config.urlOfMain,
-                deviceName: config.deviceName,
-                password: config.devicePasswordOnMain,
-            }, cb);
-        },
-
+        setFilters,
         function(cb) {
 
         // function(conf, cb) {
@@ -163,6 +166,23 @@ router.post('/config/', function(req, res, next) {
     ], next);
 
 });
+
+
+router.post('/config/updatefilters', function(req, res, next) {
+    var config = null;
+
+    async.waterfall([
+        getOrCreateConfig,
+        setFilters,
+        function(cb) {
+            res.redirect('../');
+            cb();
+        },
+
+    ], next);
+
+});
+
 
 var deleteDevice = function(options, callback) {
     var client = request.createClient(options.uri);

@@ -25,7 +25,16 @@ html
         li
           input(type="submit", value="Submit")
 
-    lr
+    hr
+
+
+    form(action='./updatefilters', method='post', enctype="application/x-www-form-urlencoded", accept-charset="utf-8")
+      ul
+        li
+          input(type='submit',  value='Update filters')
+
+    hr
+
     form(action='./reset', method='post', enctype="application/x-www-form-urlencoded", accept-charset="utf-8")
       ul
         li
